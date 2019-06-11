@@ -7,4 +7,4 @@ Exploits available:
 1. **[lter-jmpesp.py](lter-jmpesp.py)** - LTER exploit where EIP was overwritten
 2. **[lter-seh.py](lter-seh.py)** - LTER exploit where SEH was triggered
 3. **[hter.py](hter.py)** - HTER exploit
-4. **[kstet.py](kstet.py)** - KSTET exploit
+4. **[kstet-gter.py](kstet-gter.py)** - KSTET and GTER exploit. Both are basically same.
