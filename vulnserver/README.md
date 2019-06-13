@@ -8,3 +8,5 @@ Exploits available:
 2. **[lter-seh.py](lter-seh.py)** - LTER exploit where SEH was triggered
 3. **[hter.py](hter.py)** - HTER exploit
 4. **[kstet-gter.py](kstet-gter.py)** - KSTET and GTER exploit. Both are basically same.
+5. **[trun.py](trun.py)** - TRUN exploit
+6. **[GMON.py](gmon.py)** - GMON exploit 
